@@ -23,4 +23,28 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	@Override
+	public Map<String, Object> selectBoardDetail(int idx) {
+		Map<String, Object> result = boardMapper.selectBoardDetail(idx);
+		return result;
+	}
+
+	@Override
+	public int insertBoard(Map<String, Object> paramMap) {
+		int result = boardMapper.insertBoard(paramMap);
+		return result;
+	}
+
+	@Override
+	public int deleteBoard(int idx) {
+		int result = boardMapper.deleteBoard(idx);
+		return result;
+	}
+
+	@Override
+	public int updateBoard(Map<String, Object> paramMap) {
+		int result = boardMapper.updateBoard(paramMap);
+		return result;
+	}
+
 }

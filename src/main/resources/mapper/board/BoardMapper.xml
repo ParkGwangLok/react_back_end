@@ -5,6 +5,7 @@
     
 <mapper namespace="com.pkr.project.board.mapper.BoardMapper">
     <select id="selectBoard" parameterType="Map" resultType="com.pkr.project.common.vo.CustomMap">
+    /** selectBoard */
 		SELECT
 			(ROW_NUMBER() OVER()) AS ROWNUM
 			,IDX
@@ -25,28 +26,58 @@
 	    	AND TO_CHAR(CREATED_AT, 'YYYY-MM-DD') >= #{createdStart}
 	    </if>			
 	    <if test='createdEnd != null and createdEnd != ""'>
-	    	AND TO_CHAR(CREATED_AT, 'YYYY-MM-DD') >= #{createdEnd}
+	    	AND #{createdEnd} >= TO_CHAR(CREATED_AT, 'YYYY-MM-DD')
 	    </if>			
-		ORDER BY IDX
+		ORDER BY IDX DESC
 		LIMIT #{pageSize} OFFSET (#{pageNumber} - 1) * #{pageSize}
     </select>
-
-<!--     <select id="getBoardTotalCount" parameterType="Map" resultType="Int"> -->
-<!--         SELECT COUNT(IDX) -->
-<!--         FROM TB_BOARD -->
-<!--         WHERE 1=1 -->
-<!--         <if test="sk != '' || sk != null"> -->
-<!--             <if test="sk == 'title'"> -->
-<!--                 AND TITLE LIKE CONCAT('%', #{sv}, '%') -->
-<!--             </if> -->
-<!--             <if test="sk == 'contents'"> -->
-<!--                 AND CONTENTS LIKE CONCAT('%', #{sv}, '%') -->
-<!--             </if> -->
-<!--             <if test="sk == 'createdBy'"> -->
-<!--                 AND CREATED_BY LIKE CONCAT('%', #{sv}, '%') -->
-<!--             </if> -->
-<!--         </if> -->
-<!--     </select> -->
-
     
+    <select id="selectBoardDetail" parameterType="int" resultType="com.pkr.project.common.vo.CustomMap">
+    /** selectBoardDetail */
+		SELECT
+			IDX
+			,CONTENTS
+			,CREATED_AT
+			,CREATED_BY
+			,TITLE
+		FROM
+			TB_BOARD
+		WHERE 1=1
+			AND IDX = #{idx}
+    </select>
+    
+    <insert id="insertBoard" parameterType="Map">
+    /** insertBoard */
+        INSERT INTO TB_BOARD
+        (
+        TITLE
+        , CONTENTS
+        , CREATED_BY
+        , CREATED_AT
+        ) VALUES (
+        #{title}
+        , #{contents}
+        , #{createdBy}
+        , NOW()
+        )
+    </insert>
+    
+    <update id="updateBoard" parameterType="Map">
+    /** updateBoard */
+        UPDATE
+        	TB_BOARD
+        SET
+	        TITLE = #{title}
+	        ,CONTENTS = #{contents}
+	        ,CREATED_BY = #{contents}
+	        ,CREATED_AT = NOW()
+        WHERE 1=1
+        	AND IDX = #{idx}
+    </update>
+    
+    <delete id="deleteBoard" parameterType="int">
+    /** deleteBoard */
+        DELETE FROM TB_BOARD WHERE IDX = #{idx}
+    </delete>
+
 </mapper>
