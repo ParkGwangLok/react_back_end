@@ -4,6 +4,7 @@ spring:
 #  resources:
 #    static-locations: classpath:/static/
   datasource:
+#    url: jdbc:postgresql://localhost:5432/postgres
     url: jdbc:log4jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: 6022
@@ -16,6 +17,12 @@ spring:
       minimum-idle: 5
       idle-timeout: 30000
       max-lifetime: 600000
+#  jpa:
+#    properties:
+#      hibernate:
+#        format_sql: true # 쿼리를 보기 좋게 포맷팅
+#    show-sql: true       # SQL 출력 활성화			
+
 springdoc:
   api-docs:
     enabled: true
@@ -26,7 +33,10 @@ springdoc:
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-#  type-aliases-package: com.pkr.project.user.model
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl				
+#    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl		
+
+#logging:
+#  level:
+#    org.hibernate.type.descriptor.sql: off
