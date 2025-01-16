@@ -16,6 +16,7 @@ public class SwaggerConfig {
                 .info(apiInfo());
     }
 
+    //http://localhost:8080/swagger-ui/index.html
     private Info apiInfo() {
         return new Info()
                 .title("API Test") // API의 제목

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkr.project.menu.mapper.MenuMapper">
+    <select id="selectMenu" resultType="com.pkr.project.common.vo.CustomMap">
+    /** selectMenu */
+		WITH RECURSIVE MENU_HIERARCHY (
+			MENU_ID,
+			MENU_NAME,
+			PARENT_MENU_ID,
+			URL,
+			ORDER_INDEX,
+			LEVEL, 
+			PATH, 
+			CYCLE
+		) AS (
+		    SELECT 
+		        MENU_ID,
+		        MENU_NAME,
+		        PARENT_MENU_ID,
+		        URL,
+		        ORDER_INDEX,
+		        0 AS LEVEL,
+		        ARRAY[ORDER_INDEX] AS PATH,
+		        FALSE AS CYCLE
+		    FROM TB_MENU
+		    WHERE PARENT_MENU_ID IS NULL
+		    UNION ALL
+		    SELECT 
+		        M.MENU_ID,
+		        M.MENU_NAME,
+		        M.PARENT_MENU_ID,
+		        M.URL,
+		        M.ORDER_INDEX,
+				LEVEL + 1 AS LEVEL,
+				PATH || M.ORDER_INDEX AS PATH,
+				MH.ORDER_INDEX = ANY(PATH) AS CYCLE
+		    FROM TB_MENU M
+		    	,MENU_HIERARCHY MH 
+		    WHERE 1=1
+		    	AND M.PARENT_MENU_ID = MH.MENU_ID
+		        AND NOT CYCLE
+		)
+		SELECT
+		DISTINCT 
+		    LPAD('', LEVEL) || MENU_NAME AS MENU_TREE,
+		    REPEAT('  ', LEVEL) || MENU_NAME AS MENU_TREE,
+		    URL,
+		    PATH,
+		    ORDER_INDEX,
+		    MH.MENU_ID,
+		    PARENT_MENU_ID
+		FROM MENU_HIERARCHY MH
+		INNER JOIN TB_ROLE_MENU TRM
+		ON MH.MENU_ID = TRM.MENU_ID
+		WHERE 1=1
+		AND TRM.ROLE_ID IN ('ADMIN', 'USER')
+		ORDER BY PATH, ORDER_INDEX
+    </select>
+</mapper>
