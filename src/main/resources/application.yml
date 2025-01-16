@@ -16,10 +16,17 @@ spring:
       minimum-idle: 5
       idle-timeout: 30000
       max-lifetime: 600000
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter : method
+    doc-expansion : none
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.pkr.project.user.model
+#  type-aliases-package: com.pkr.project.user.model
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl				
