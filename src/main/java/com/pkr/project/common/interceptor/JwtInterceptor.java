@@ -43,10 +43,10 @@ public class JwtInterceptor implements HandlerInterceptor {
                 response.getWriter().write("Token has expired");
                 return false;  // 만료된 토큰인 경우 요청 처리 중단
             }
-        } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Authorization header missing or invalid");
-            return false;  // Authorization 헤더가 없으면 요청 처리 중단
+//        } else {
+//            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//            response.getWriter().write("Authorization header missing or invalid");
+//            return false;  // Authorization 헤더가 없으면 요청 처리 중단
         }
         return true;  // 유효한 토큰이면 요청을 처리함
     }
