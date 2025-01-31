@@ -2,6 +2,7 @@ package com.pkr.project.common.filter;
 
 import java.io.IOException;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.pkr.project.common.utils.JwtUtil;
@@ -11,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@Component
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
 

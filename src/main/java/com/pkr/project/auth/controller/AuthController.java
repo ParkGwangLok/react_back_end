@@ -10,7 +10,7 @@ import com.pkr.project.common.utils.JwtUtil;
 import com.pkr.project.user.model.User;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
     private final JwtUtil jwtUtil;
 
