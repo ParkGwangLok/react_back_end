@@ -69,7 +69,7 @@
         SET
 	        TITLE = #{title}
 	        ,CONTENTS = #{contents}
-	        ,CREATED_BY = #{contents}
+	        ,CREATED_BY = #{createdBy}
 	        ,CREATED_AT = NOW()
         WHERE 1=1
         	AND IDX = #{idx}

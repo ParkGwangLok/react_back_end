@@ -37,9 +37,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/auth/**");  // /api/auth/** 경로는 제외
         
         // 두 번째 인터셉터 등록
-        registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/api/**") // /api/another/** 경로에만 적용
-                .excludePathPatterns("/api/auth/**"); // 제외할 경로 설정        
+//        registry.addInterceptor(jwtInterceptor)
+//                .addPathPatterns("/api/**") // /api/another/** 경로에만 적용
+//                .excludePathPatterns("/api/auth/**"); // 제외할 경로 설정        
     }
 
 }
