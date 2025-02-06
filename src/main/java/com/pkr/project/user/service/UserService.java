@@ -7,5 +7,5 @@ import com.pkr.project.user.model.User;
 public interface UserService {
     List<User> getAllUsers(User user);
 
-    void addUser(User user);
+    void insertUser(User user);
 }

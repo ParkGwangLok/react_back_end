@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class BoardServiceImpl implements BoardService {
     private final BoardMapper boardMapper;
-
+    
 	@Override
 	public List<Map<String, Object>> selectBoard(Map<String, Object> paramMap) {
 		JSONObject jsonObject = new JSONObject(paramMap);

@@ -11,5 +11,7 @@ public interface UserMapper {
 //    @Select("SELECT * FROM TB_USER")
     List<User> findAllUsers(User user);
 
-//    void insertUser(User user);
+    void insertUser(User user);
+
+	String findUserByUsername(String userId);
 }

@@ -3,6 +3,15 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pkr.project.user.mapper.UserMapper">
+    <select id="findUserByUsername" parameterType="com.pkr.project.user.model.User" resultType="string">
+    /** findUserByUsername */
+	    SELECT 
+		CASE WHEN COUNT(*) = 0 THEN 'N' 
+		ELSE 'Y'
+		END AS DUPLICATE_YN
+		FROM TB_USER WHERE USER_ID = #{userId}
+    </select>
+
     <select id="findAllUsers" parameterType="com.pkr.project.user.model.User" resultType="com.pkr.project.user.model.User">
     /** findAllUsers */
 	    SELECT USER_ID, USER_PW FROM TB_USER
@@ -11,4 +20,9 @@
 	    	AND USER_ID = #{userId}
 	    </if>
     </select>
+    
+    <insert id="insertUser">
+        INSERT INTO TB_USER (USER_ID, USER_PW, user_nm)
+        VALUES (#{userId}, #{userPw}, #{userNm})
+    </insert>    
 </mapper>

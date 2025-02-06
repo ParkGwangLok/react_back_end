@@ -21,7 +21,11 @@ spring:
 #    properties:
 #      hibernate:
 #        format_sql: true # 쿼리를 보기 좋게 포맷팅
-#    show-sql: true       # SQL 출력 활성화			
+#    show-sql: true       # SQL 출력 활성화      
+#  security:
+#    user:
+#      name: klpark79
+#      password: 6022
 
 springdoc:
   api-docs:
@@ -35,7 +39,7 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
-#    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl		
+#    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl    
 
 #logging:
 #  level:
