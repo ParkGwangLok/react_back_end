@@ -1,12 +1,13 @@
 package com.pkr.project.common.exception;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import java.time.LocalDateTime;
 
-@RestControllerAdvice
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+//@RestControllerAdvice
+//@ControllerAdvice
+//@ResponseBody
 public class GlobalExceptionHandler {
 
     // 모든 사용자 정의 예외 처리
